@@ -51,6 +51,10 @@ jobs:
         run: |
           ./emlib.sh build opus || true
 
+      - name: build opusfile
+        run: |
+          ./emlib.sh build opusfile || true
+
       - name: build flatbuffers
         run: |
           ./emlib.sh build flatbuffers || true
