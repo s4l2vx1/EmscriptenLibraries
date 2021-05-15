@@ -9,7 +9,9 @@ jobs:
       matrix:
         config:
           - container: 'emscripten/emsdk:latest'
-          - container: 'emscripten/emsdk:2.0.4'         
+            artifactName: 'emscripten-latest'
+          - container: 'emscripten/emsdk:2.0.4'
+            artifactName: 'emscripten-2.0.4'         
     container: 
       image: ${{ matrix.config.container }}
 
@@ -64,7 +66,7 @@ jobs:
       - name: save files
         uses: actions/upload-artifact@v2
         with:
-          name: emlib-artifacts-${{ matrix.config.container }}
+          name: emlib-artifacts-${{ matrix.config.artifactName }}
           path: |
             include/**/*
             lib/**/*
