@@ -49,6 +49,10 @@ jobs:
         run: |
           ./emlib.sh build opus || true
 
+      - name: build flatbuffers
+        run: |
+          ./emlib.sh build flatbuffers || true
+
       - name: build opencv
         run: |
           ./emlib.sh build opencv || true
