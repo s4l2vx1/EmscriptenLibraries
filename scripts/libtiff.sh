@@ -9,7 +9,7 @@ function init() {
     if [ ! -e "${RepositoryName}" ]; then
         git clone --depth 1 ${RepositoryAddress}
         # TODO: 
-        sed -i -e 's/CHECK_TYPE_SIZE("size_t" SIZEOF_SIZE_T)/set(SIZEOF_SIZE_T 4)/g' "libtiff/cmake/TypeSizeChecks.cmake"
+        sed -i -e 's/check_type_size("size_t" SIZEOF_SIZE_T)/set(SIZEOF_SIZE_T 8)/g' "libtiff/cmake/TypeSizeChecks.cmake"
     fi
 
     cd ${RepositoryName}
