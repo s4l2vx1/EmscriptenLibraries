@@ -2,7 +2,7 @@
 
 RepositoryName="opencv"
 RepositoryAddress="https://github.com/opencv/opencv.git"
-EmscriptenDir="${EMSDK}"
+EmscriptenDir="${EMSDK}/upstream/emscripten"
 
 function init() {
     cd ${RepositoryDir}
