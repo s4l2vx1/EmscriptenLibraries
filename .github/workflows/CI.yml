@@ -15,7 +15,8 @@ jobs:
 
       - name: aquire missing tools
         run: |
-          sudo apt install autotools-dev autoconf
+          sudo apt update -y
+          sudo apt install -y autotools-dev autoconf
 
       - name: add execute permission
         run: |
