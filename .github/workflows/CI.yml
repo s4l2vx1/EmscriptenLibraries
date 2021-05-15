@@ -20,23 +20,23 @@ jobs:
 
       - name: build giflib
         run: |
-          ./emlib.sh webp || true
+          ./emlib.sh build webp || true
 
       - name: build turbojpeg
         run: |
-          ./emlib.sh turbojpeg || true
+          ./emlib.sh build turbojpeg || true
 
       - name: build giflib
         run: |
-          ./emlib.sh giflib || true
+          ./emlib.sh build giflib || true
 
       - name: build opencv
         run: |
-          ./emlib.sh opencv || true
+          ./emlib.sh build opencv || true
 
       - name: build ffmpeg
         run: |
-          ./emlib.sh ffmpeg || true
+          ./emlib.sh build ffmpeg || true
 
       - name: save files
         uses: actions/upload-artifact@v2
