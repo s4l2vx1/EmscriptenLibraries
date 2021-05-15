@@ -35,6 +35,10 @@ jobs:
         run: |
           ./emlib.sh build giflib || true
 
+      - name: build libtiff
+        run: |
+          ./emlib.sh build libtiff || true
+
       - name: build opus
         run: |
           ./emlib.sh build opus || true
