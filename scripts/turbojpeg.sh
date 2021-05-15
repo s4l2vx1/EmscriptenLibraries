@@ -18,6 +18,7 @@ function build_wasm() {
     mkdir build_wasm
     cd build_wasm
     emcmake cmake -G"Unix Makefiles" -DCMAKE_EXECUTABLE_SUFFIX=.html \
+        -DCMAKE_BUILD_TYPE=Release \
         -DWITH_SIMD=0 -DENABLE_SHARED=0 \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
         -DCMAKE_C_FLAGS="-Wall -s ALLOW_MEMORY_GROWTH=1" ..
@@ -30,6 +31,7 @@ function build_wasm_pic() {
     mkdir build_wasm_pic
     cd build_wasm_pic
     emcmake cmake -G"Unix Makefiles" -DCMAKE_EXECUTABLE_SUFFIX=.html \
+        -DCMAKE_BUILD_TYPE=Release \
         -DWITH_SIMD=0 -DENABLE_SHARED=0 \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
         -DCMAKE_C_FLAGS="-Wall -s ALLOW_MEMORY_GROWTH=1" ..
@@ -42,6 +44,7 @@ function build_asmjs() {
     mkdir build_asmjs
     cd build_asmjs
     emcmake cmake -G"Unix Makefiles" -DCMAKE_EXECUTABLE_SUFFIX=.html \
+        -DCMAKE_BUILD_TYPE=Release \
         -DWITH_SIMD=0 -DENABLE_SHARED=0 \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
         -DCMAKE_C_FLAGS="-Wall -s ALLOW_MEMORY_GROWTH=1" ..
