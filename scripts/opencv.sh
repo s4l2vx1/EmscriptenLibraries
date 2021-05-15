@@ -21,7 +21,9 @@ function init() {
 }
 
 function build_wasm() {
-    python ./platforms/js/build_js.py build_wasm --build_wasm --build_flags="-mno-bulk-memory -DCMAKE_INSTALL_PREFIX=${SysRootDir}"
+    python3 ./platforms/js/build_js.py build_wasm --build_wasm --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" --build_flags="-mno-bulk-memory"
+    cd build_wasm
+    make install
 }
 
 function build_wasm_pic() {
