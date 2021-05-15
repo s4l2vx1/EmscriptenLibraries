@@ -20,6 +20,7 @@ jobs:
 
       - name: add execute permission
         run: |
+          chmod +x /emsdk/emsdk_env.sh
           chmod +x emlib.sh
           chmod -R +x scripts
 
