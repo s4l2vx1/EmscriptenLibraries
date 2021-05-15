@@ -14,14 +14,14 @@ function init() {
 }
 
 function build_wasm() {
-    # rm -rf build_wasm
-    # mkdir build_wasm
+    rm -rf build_wasm
+    mkdir build_wasm
     cd build_wasm
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
         -DFLATBUFFERS_BUILD_TESTS=Off \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
-    make -j4
+    make
     make install
 }
 
