@@ -58,3 +58,5 @@ jobs:
           path: |
             include/**/*
             lib/**/*
+            share/**/*
+            bin/**/*
