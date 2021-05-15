@@ -1,0 +1,47 @@
+name: CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build-wasm:
+    runs-on: ubuntu-20.04
+    container: 
+      image: 'emscripten/emsdk:2.0.4'
+
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: add execute permissoin
+        run: |
+          chmod +x emlib.sh
+          chmod -R +x scripts
+
+      - name: build giflib
+        run: |
+          ./emlib.sh webp || true
+
+      - name: build turbojpeg
+        run: |
+          ./emlib.sh turbojpeg || true
+
+      - name: build giflib
+        run: |
+          ./emlib.sh giflib || true
+
+      - name: build opencv
+        run: |
+          ./emlib.sh opencv || true
+
+      - name: build ffmpeg
+        run: |
+          ./emlib.sh ffmpeg || true
+
+      - name: save files
+        uses: actions/upload-artifact@v2
+        with:
+          name: emlib-artifacts
+          path: |
+            include/**/*
+            lib/**/*
