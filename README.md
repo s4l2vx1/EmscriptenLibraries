@@ -13,5 +13,6 @@ emscripten library building helper
 * ffmpeg
 * giflib
 * opencv
+* opus
 * turbojpeg
 * webp
