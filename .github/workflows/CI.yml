@@ -5,8 +5,13 @@ on: [ push, pull_request ]
 jobs:
   build-wasm:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        config:
+          - container: 'emscripten/emsdk:latest'
+          - container: 'emscripten/emsdk:2.0.4'         
     container: 
-      image: 'emscripten/emsdk:2.0.4'
+      image: ${{ matrix.config.container }}
 
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
 
@@ -55,7 +60,7 @@ jobs:
       - name: save files
         uses: actions/upload-artifact@v2
         with:
-          name: emlib-artifacts
+          name: emlib-artifacts-${{ matrix.config.container }}
           path: |
             include/**/*
             lib/**/*
