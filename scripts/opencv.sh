@@ -2,6 +2,7 @@
 
 RepositoryName="opencv"
 RepositoryAddress="https://github.com/opencv/opencv.git"
+EmscriptenDir="${EMSDK}"
 
 function init() {
     cd ${RepositoryDir}
@@ -21,7 +22,7 @@ function init() {
 }
 
 function build_wasm() {
-    python3 ./platforms/js/build_js.py build_wasm --build_wasm --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" --build_flags="-mno-bulk-memory"
+    python3 ./platforms/js/build_js.py build_wasm --build_wasm --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" --build_flags="-mno-bulk-memory" --emscripten_dir="${EmscriptenDir}"
     cd build_wasm
     make install
 }
