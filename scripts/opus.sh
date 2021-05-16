@@ -19,6 +19,7 @@ function build_wasm() {
     cd build_wasm
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
+        -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
     make
     make install
@@ -30,6 +31,7 @@ function build_wasm_pic() {
     cd build_wasm_pic
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
+        -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
         -DCMAKE_C_FLAGS="-s SIDE_MODULE=1" -DCMAKE_CXX_FLAGS="-s SIDE_MODULE=1" ..
     make
@@ -42,6 +44,7 @@ function build_asmjs() {
     cd build_asmjs
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
+        -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
         -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
     make
     make install

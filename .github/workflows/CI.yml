@@ -23,7 +23,7 @@ jobs:
       - name: aquire missing tools
         run: |
           sudo apt update -y
-          sudo apt install -y autotools-dev autoconf pkg-config
+          sudo apt install -y autotools-dev autoconf automake libtool pkg-config
 
       - name: add execute permission
         run: |
