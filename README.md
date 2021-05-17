@@ -18,3 +18,4 @@ emscripten library building helper
 * libtiff (<https://gitlab.com/libtiff/libtiff.git>)
 * turbojpeg (<https://github.com/libjpeg-turbo/libjpeg-turbo.git>)
 * webp (<https://github.com/webmproject/libwebp.git>)
+* openssl (<https://github.com/openssl/openssl.git>)

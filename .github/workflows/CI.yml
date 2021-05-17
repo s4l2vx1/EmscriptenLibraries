@@ -51,13 +51,17 @@ jobs:
         run: |
           ./emlib.sh build opus || true
 
-      - name: build opusfile
-        run: |
-          ./emlib.sh build opusfile || true
-
       - name: build flatbuffers
         run: |
           ./emlib.sh build flatbuffers || true
+
+      - name: build libopenssl
+        run: |
+          ./emlib.sh build libopenssl || true
+
+      - name: build opusfile
+        run: |
+          ./emlib.sh build opusfile || true
 
       - name: build opencv
         run: |
