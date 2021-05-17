@@ -7,10 +7,11 @@ function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone --depth 1 ${RepositoryAddress}
+        git clone ${RepositoryAddress}
     fi
 
     cd ${RepositoryName}
+    ./update_version
 }
 
 function build_wasm() {
