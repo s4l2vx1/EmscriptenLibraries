@@ -9,6 +9,7 @@ function usage() {
 export SysRootDir=`pwd`
 export RepositoryDir="${SysRootDir}/repositories"
 export PKG_CONFIG_PATH="${SysRootDir}/lib/pkgconfig"
+export EM_PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
 
 function build() {
   emsdk_env.sh
