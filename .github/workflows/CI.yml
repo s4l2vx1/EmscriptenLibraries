@@ -47,6 +47,10 @@ jobs:
         run: |
           ./emlib.sh build libtiff || true
 
+      - name: build ogg
+        run: |
+          ./emlib.sh build ogg || true
+
       - name: build opus
         run: |
           ./emlib.sh build opus || true

@@ -19,3 +19,4 @@ emscripten library building helper
 * turbojpeg (<https://github.com/libjpeg-turbo/libjpeg-turbo.git>)
 * webp (<https://github.com/webmproject/libwebp.git>)
 * openssl (<https://github.com/openssl/openssl.git>)
+* ogg (<https://github.com/xiph/ogg.git>)
