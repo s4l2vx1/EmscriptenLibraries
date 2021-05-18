@@ -14,9 +14,11 @@ emscripten library building helper
 * FlatBuffers (<https://github.com/google/flatbuffers.git>)
 * giflib (<https://github.com/mirrorer/giflib.git>)
 * opencv (<https://github.com/opencv/opencv.git>)
+* ogg (<https://github.com/xiph/ogg.git>)
 * opus (<https://github.com/xiph/opus.git>)
+* opusfile (<https://github.com/xiph/opusfile.git>)
 * libtiff (<https://gitlab.com/libtiff/libtiff.git>)
 * turbojpeg (<https://github.com/libjpeg-turbo/libjpeg-turbo.git>)
 * webp (<https://github.com/webmproject/libwebp.git>)
 * openssl (<https://github.com/openssl/openssl.git>)
-* ogg (<https://github.com/xiph/ogg.git>)
+
