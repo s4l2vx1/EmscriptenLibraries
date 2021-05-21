@@ -2,6 +2,7 @@
 
 RepositoryName="opencv"
 RepositoryAddress="https://github.com/opencv/opencv.git"
+RepositoryLicense="Apache License v2.0"
 EmscriptenDir="${EMSDK}/upstream/emscripten"
 
 function init() {

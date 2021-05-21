@@ -2,6 +2,7 @@
 
 RepositoryName="ogg"
 RepositoryAddress="https://github.com/xiph/ogg.git"
+RepositoryLicense="BSD 3-Clause License"
 
 function init() {
     cd ${RepositoryDir}

@@ -2,6 +2,7 @@
 
 RepositoryName="libtiff"
 RepositoryAddress="https://gitlab.com/libtiff/libtiff.git"
+RepositoryLicense="MIT License"
 
 function init() {
     cd ${RepositoryDir}

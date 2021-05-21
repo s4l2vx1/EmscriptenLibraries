@@ -2,6 +2,7 @@
 
 RepositoryName="openssl"
 RepositoryAddress="https://github.com/openssl/openssl.git"
+RepositoryLicense="Apache License v2.0"
 
 function init() {
     cd ${RepositoryDir}

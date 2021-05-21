@@ -2,6 +2,7 @@
 
 RepositoryName="libjpeg-turbo"
 RepositoryAddress="https://github.com/libjpeg-turbo/libjpeg-turbo.git"
+RepositoryLicense="IJG License; Modified BSD 3-Clause License; zlib License"
 
 function init() {
     cd ${RepositoryDir}

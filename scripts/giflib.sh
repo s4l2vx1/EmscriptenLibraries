@@ -2,6 +2,7 @@
 
 RepositoryName="giflib"
 RepositoryAddress="https://github.com/mirrorer/giflib.git"
+RepositoryLicense="MIT License"
 
 function init() {
     cd ${RepositoryDir}

@@ -2,6 +2,7 @@
 
 RepositoryName="opus"
 RepositoryAddress="https://github.com/xiph/opus.git"
+RepositoryLicense="BSD 3-Clause License"
 
 function init() {
     cd ${RepositoryDir}

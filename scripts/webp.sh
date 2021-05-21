@@ -2,6 +2,7 @@
 
 RepositoryName="libwebp"
 RepositoryAddress="https://github.com/webmproject/libwebp.git"
+RepositoryLicense="BSD 3-Clause License"
 
 function init() {
     cd ${RepositoryDir}

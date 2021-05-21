@@ -16,8 +16,9 @@ function list() {
   echo "available packages:"
 
   for scriptPath in `find ./scripts -type f -path "*/*.sh"`; do
+    RepositoryLicense=
     source ${scriptPath}
-    echo "  ${RepositoryName} (<${RepositoryAddress}>)"
+    echo "  ${RepositoryName} <${RepositoryAddress}> (${RepositoryLicense})"
   done
 }
 

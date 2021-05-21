@@ -2,6 +2,7 @@
 
 RepositoryName="flatbuffers"
 RepositoryAddress="https://github.com/google/flatbuffers.git"
+RepositoryLicense="Apache License v2.0"
 
 function init() {
     cd ${RepositoryDir}

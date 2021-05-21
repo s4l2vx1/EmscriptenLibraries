@@ -2,6 +2,7 @@
 
 RepositoryName="FFmpeg"
 RepositoryAddress="https://github.com/FFmpeg/FFmpeg.git"
+RepositoryLicense="LGPL v2.1, v3.0; GPL v2.1, v3.0"
 
 function init() {
     cd ${RepositoryDir}
