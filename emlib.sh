@@ -4,12 +4,22 @@ function usage() {
     echo "emscripten library building helper"
     echo "usage:"
     echo "  emlib.sh build <package name>"
+    echo "  emlib.sh list"
 }
 
 export SysRootDir=`pwd`
 export RepositoryDir="${SysRootDir}/repositories"
 export PKG_CONFIG_PATH="${SysRootDir}/lib/pkgconfig"
 export EM_PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+
+function list() {
+  echo "available packages:"
+
+  for scriptPath in `find ./scripts -type f -path "*/*.sh"`; do
+    source ${scriptPath}
+    echo "  ${RepositoryName} (<${RepositoryAddress}>)"
+  done
+}
 
 function build() {
   if [ ! -e "${RepositoryDir}" ]; then
@@ -39,6 +49,8 @@ function main() {
   case "${1}" in
     build)   
       build $*;;
+    list)
+      list;;
     *)
       usage;;
   esac
