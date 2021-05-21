@@ -12,6 +12,10 @@ export PKG_CONFIG_PATH="${SysRootDir}/lib/pkgconfig"
 export EM_PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
 
 function build() {
+  if [ ! -e "${RepositoryDir}" ]; then
+    mkdir "${RepositoryDir}"
+  fi
+
   emsdk_env.sh
 
   shift 1
