@@ -40,6 +40,8 @@ function build() {
       continue
     fi
 
+    echo "emlib: building package '${1}' ..."
+
     source ${scriptPath}
     init && build_wasm
     shift 1

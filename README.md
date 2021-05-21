@@ -21,4 +21,4 @@ emscripten library building helper
 * turbojpeg (<https://github.com/libjpeg-turbo/libjpeg-turbo.git>)
 * webp (<https://github.com/webmproject/libwebp.git>)
 * openssl (<https://github.com/openssl/openssl.git>)
-
+* libmpg123 (<https://mpg123.org>)
