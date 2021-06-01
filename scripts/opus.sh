@@ -24,8 +24,7 @@ function build_wasm() {
         -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
         -DCMAKE_PREFIX_PATH="${SysRootDir}" \
         -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-        -DCMAKE_PREFIX_PATH=${SysRootDir} \
-        -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" ..
     make install
 }
 
@@ -38,7 +37,7 @@ function build_wasm_pic() {
         -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
         -DCMAKE_PREFIX_PATH="${SysRootDir}" \
         -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-        -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
         -DCMAKE_C_FLAGS="-s SIDE_MODULE=1" -DCMAKE_CXX_FLAGS="-s SIDE_MODULE=1" ..
     make install
 }
@@ -52,6 +51,6 @@ function build_asmjs() {
         -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
         -DCMAKE_PREFIX_PATH="${SysRootDir}" \
         -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-        -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" ..
     make install
 }

@@ -36,7 +36,7 @@ function build_wasm_pic() {
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_PREFIX_PATH="${SysRootDir}" \
         -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-        -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
         -DCMAKE_C_FLAGS="-s SIDE_MODULE=1" -DCMAKE_CXX_FLAGS="-s SIDE_MODULE=1" ..
     make install
 }
@@ -49,6 +49,6 @@ function build_asmjs() {
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_PREFIX_PATH="${SysRootDir}" \
         -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-        -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" ..
     make install
 }

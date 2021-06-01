@@ -20,8 +20,10 @@ function build_wasm() {
     cd build_wasm
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DWEBP_BUILD_WEBP_JS=On -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
-    make
+        -DCMAKE_PREFIX_PATH="${SysRootDir}" \
+        -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
+        -DWEBP_BUILD_WEBP_JS=On ..
     make install
 }
 
@@ -31,9 +33,11 @@ function build_wasm_pic() {
     cd build_wasm_pic
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DWEBP_BUILD_WEBP_JS=On -DCMAKE_INSTALL_PREFIX=${SysRootDir} \
+        -DCMAKE_PREFIX_PATH="${SysRootDir}" \
+        -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
+        -DWEBP_BUILD_WEBP_JS=On \
         -DCMAKE_C_FLAGS="-s SIDE_MODULE=1" -DCMAKE_CXX_FLAGS="-s SIDE_MODULE=1" ..
-    make
     make install
 }
 
@@ -43,7 +47,9 @@ function build_asmjs() {
     cd build_asmjs
     emcmake cmake -G"Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DWEBP_BUILD_WEBP_JS=On -DCMAKE_INSTALL_PREFIX=${SysRootDir} ..
-    make
+        -DCMAKE_PREFIX_PATH="${SysRootDir}" \
+        -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
+        -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
+        -DWEBP_BUILD_WEBP_JS=On ..
     make install
 }
