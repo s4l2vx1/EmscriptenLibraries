@@ -9,32 +9,26 @@ function init() {
 
     if [ ! -e "${RepositoryName}" ]; then
         git clone --depth 1 ${RepositoryAddress}
+
+        cd ${RepositoryName}
+        autoreconf -ifs
+    else
+        cd ${RepositoryName}
     fi
-
-    cd ${RepositoryName}
-    autoreconf -ifs
 }
 
-function build_wasm() {
-    rm -rf build_wasm
-    mkdir build_wasm
-    cd build_wasm
-    emconfigure ../configure --prefix=${SysRootDir}
-    make install
+function clean() {
+    rm -rf ${BuildDirName}
 }
 
-function build_wasm_pic() {
-    rm -rf build_wasm_pic
-    mkdir build_wasm_pic
-    cd build_wasm_pic
-    emconfigure ../configure --prefix=${SysRootDir} CFLAGS='-fPIC' CXXFLAGS='-fPIC'
-    make install
-}
-
-function build_asmjs() {
-    rm -rf build_asmjs
-    mkdir build_asmjs
-    cd build_asmjs
-    emconfigure ../configure --prefix=${SysRootDir}
+function build() {
+    if [ ! -e "${BuildDirName}" ]; then
+        mkdir ${BuildDirName}
+        cd ${BuildDirName}
+        emconfigure ../configure enable_static=yes enable_shared=no --prefix=${SysRootDir}
+    else
+        cd ${BuildDirName}
+    fi
+    
     make install
 }

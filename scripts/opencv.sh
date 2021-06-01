@@ -22,18 +22,18 @@ function init() {
     cd ${RepositoryName}
 }
 
+function clean() {
+    rm -rf ${BuildDirName}
+}
+
 function build_wasm() {
-    python3 ./platforms/js/build_js.py build_wasm --build_wasm --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" --cmake_option="-DOPENCV_GENERATE_PKGCONFIG=ON" --build_flags="-mno-bulk-memory" --emscripten_dir="${EmscriptenDir}"
-    cd build_wasm
+    python3 ./platforms/js/build_js.py build \
+        --build_wasm \
+        --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" \
+        --cmake_option="-DOPENCV_GENERATE_PKGCONFIG=ON" \
+        --build_flags="-mno-bulk-memory" \
+        --emscripten_dir="${EmscriptenDir}"
+        
+    cd ${BuildDirName}
     make install
-}
-
-function build_wasm_pic() {
-    echo "Not Implemented"
-    exit 1
-}
-
-function build_asmjs() {
-    echo "Not Implemented"
-    exit 1
 }

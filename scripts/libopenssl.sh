@@ -15,29 +15,19 @@ function init() {
     chmod +x Configure
 }
 
-function build_wasm() {
-    rm -rf build_wasm
-    mkdir build_wasm
-    cd build_wasm
-    emconfigure ../Configure --prefix=${SysRootDir} -static no-asm no-threads no-shared no-pic
-    sed -ie "/CROSS_COMPILE=/c CROSS_COMPILE=" Makefile
-    make install
+function clean() {
+    rm -rf ${BuildDirName}
 }
 
-function build_wasm_pic() {
-    rm -rf build_wasm_pic
-    mkdir build_wasm_pic
-    cd build_wasm_pic
-    emconfigure ../configure --prefix=${SysRootDir} CFLAGS='-fPIC' CXXFLAGS='-fPIC'
-    sed -ie "/CROSS_COMPILE=/c CROSS_COMPILE=" Makefile
-    make install
-}
-
-function build_asmjs() {
-    rm -rf build_asmjs
-    mkdir build_asmjs
-    cd build_asmjs
-    emconfigure ../configure --prefix=${SysRootDir}
-    sed -ie "/CROSS_COMPILE=/c CROSS_COMPILE=" Makefile
+function build() {
+    if [ ! -e "${BuildDirName}" ]; then
+        mkdir ${BuildDirName}
+        cd ${BuildDirName}
+        emconfigure ../Configure --prefix=${SysRootDir} -static no-asm no-threads no-shared no-pic
+        sed -ie "/CROSS_COMPILE=/c CROSS_COMPILE=" Makefile
+    else
+        cd ${BuildDirName}
+    fi
+    
     make install
 }

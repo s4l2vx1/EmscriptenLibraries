@@ -14,30 +14,22 @@ function init() {
     cd ${RepositoryName}
 }
 
-function build_wasm() {
-    emconfigure ./configure --cc=emcc --ar=emar --ranlib=emranlib --prefix=${SysRootDir} \
-        --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic \
-        --disable-stripping --disable-programs --disable-asm --disable-doc --disable-pthreads --disable-w32threads --disable-debug \
-        --enable-decoder=hevc --enable-parser=hevc --enable-demuxer=hevc --enable-decoder=h264 --enable-parser=h264 --enable-demuxer=h264
-    make
-    make install
+function clean() {
+    rm -rf ${BuildDirName}
 }
 
-function build_wasm_pic() {
-    # TODO: Add -fPIC Flag
-    emconfigure ./configure --cc=emcc --ar=emar --ranlib=emranlib --prefix=${SysRootDir} \
-        --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic \
-        --disable-stripping --disable-programs --disable-asm --disable-doc --disable-pthreads --disable-w32threads --disable-debug \
-        --enable-decoder=hevc --enable-parser=hevc --enable-demuxer=hevc --enable-decoder=h264 --enable-parser=h264 --enable-demuxer=h264
-    make
-    make install
-}
+function build() {
+    if [ ! -e "${BuildDirName}" ]; then
+        mkdir ${BuildDirName}
+        cd ${BuildDirName}
 
-function build_asmjs() {
-    emconfigure ./configure --cc=emcc --ar=emar --ranlib=emranlib --prefix=${SysRootDir} \
-        --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic \
-        --disable-stripping --disable-programs --disable-asm --disable-doc --disable-pthreads --disable-w32threads --disable-debug \
-        --enable-decoder=hevc --enable-parser=hevc --enable-demuxer=hevc --enable-decoder=h264 --enable-parser=h264 --enable-demuxer=h264
-    make
+        emconfigure ./configure --cc=emcc --ar=emar --ranlib=emranlib --prefix=${SysRootDir} \
+            --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic \
+            --disable-stripping --disable-programs --disable-asm --disable-doc --disable-pthreads --disable-w32threads --disable-debug \
+            --enable-decoder=hevc --enable-parser=hevc --enable-demuxer=hevc --enable-decoder=h264 --enable-parser=h264 --enable-demuxer=h264
+    else
+        cd ${BuildDirName}
+    fi
+   
     make install
 }
