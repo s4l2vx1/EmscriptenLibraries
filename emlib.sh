@@ -14,7 +14,7 @@ ModifiedModifiedPackages=()
 
 SysRootDir=`pwd`
 RepositoryDir="${SysRootDir}/repositories"
-BuildDirName="build"
+BuildDirName="build_wasm"
 MakeConcurrency=$(grep -c ^processor /proc/cpuinfo)
 
 function analyse_command_lines() {

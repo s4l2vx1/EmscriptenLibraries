@@ -26,8 +26,8 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
-function build_wasm() {
-    python3 ./platforms/js/build_js.py build \
+function build() {
+    python3 ./platforms/js/build_js.py ${BuildDirName} \
         --build_wasm \
         --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" \
         --cmake_option="-DOPENCV_GENERATE_PKGCONFIG=ON" \

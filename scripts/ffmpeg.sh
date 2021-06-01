@@ -23,7 +23,7 @@ function build() {
         mkdir ${BuildDirName}
         cd ${BuildDirName}
 
-        emconfigure ./configure --cc=emcc --ar=emar --ranlib=emranlib --prefix=${SysRootDir} \
+        emconfigure ../configure --cc=emcc --ar=emar --ranlib=emranlib --prefix=${SysRootDir} \
             --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic \
             --disable-stripping --disable-programs --disable-asm --disable-doc --disable-pthreads --disable-w32threads --disable-debug \
             --enable-decoder=hevc --enable-parser=hevc --enable-demuxer=hevc --enable-decoder=h264 --enable-parser=h264 --enable-demuxer=h264
