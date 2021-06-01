@@ -41,5 +41,5 @@ function build() {
         cd ${BuildDirName}
     fi
    
-    make install
+    make install -j "${MakeConcurrency}"
 }

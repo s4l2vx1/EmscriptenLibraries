@@ -10,11 +10,14 @@ function usage() {
 }
 
 StartDir=`pwd`
+ModifiedModifiedPackages=()
+
 SysRootDir=`pwd`
 RepositoryDir="${SysRootDir}/repositories"
 BuildDirName="build"
+MakeConcurrency=$(grep -c ^processor /proc/cpuinfo)
 
-function init_flags() {
+function analyse_command_lines() {
   shift 1
 
   while [ "${1}" != "" ]; do
@@ -22,16 +25,20 @@ function init_flags() {
       --sysroot)
         SysRootDir="${2}"
         RepositoryDir="${SysRootDir}/repositories"
-        shift 1;;
+        shift 2;;
       --repository-dir)
         RepositoryDir="${2}"
-        shift 1;;
+        shift 2;;
       --build-dir-name)
         BuildDirName="${2}"
+        shift 2;;
+      -j)
+        MakeConcurrency="${2}"
+        shift 2;;
+      *)
+        ModifiedPackages+=( "${1}" )
         shift 1;;
     esac
-
-    shift 1
   done
 
   export PKG_CONFIG_PATH="${SysRootDir}/lib/pkgconfig"
@@ -44,8 +51,6 @@ function build_packages() {
   fi
 
   emsdk_env.sh
-
-  shift 1
 
   while [ "${1}" != "" ]; do
     cd "${StartDir}"
@@ -66,7 +71,6 @@ function build_packages() {
 }
 
 function clean_packages() {
-  shift 1
 
   while [ "${1}" != "" ]; do
     cd "${StartDir}"
@@ -97,16 +101,16 @@ function list() {
 }
 
 function main() {
-  init_flags $*
+  analyse_command_lines $*
 
   case "${1}" in
     build)   
-      build_packages $*;;
+      build_packages "${ModifiedPackages[@]}";;
     rebuild)
-      clean_packages $*
-      build_packages $*;;
+      clean_packages "${ModifiedPackages[@]}"
+      build_packages "${ModifiedPackages[@]}";;
     clean)
-      clean_packages $*;;
+      clean_packages "${ModifiedPackages[@]}";;
     list)
       list;;
     *)
