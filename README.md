@@ -22,3 +22,8 @@ emscripten library building helper
 * webp (<https://github.com/webmproject/libwebp.git>)
 * openssl (<https://github.com/openssl/openssl.git>)
 * libmpg123 (<https://mpg123.org>)
+* zlib (<https://zlib.net/>)
+* libpng (<http://www.libpng.org/pub/png/libpng.html>)
+* freetype (<https://github.com/openssl/openssl.git>)
+* harfbuzz (<https://github.com/harfbuzz/harfbuzz.git>)
+* soundtouch (<https://gitlab.com/soundtouch/soundtouch.git>)
