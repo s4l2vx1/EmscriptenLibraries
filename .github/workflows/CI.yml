@@ -75,6 +75,30 @@ jobs:
         run: |
           ./emlib.sh build ffmpeg || true
 
+      - name: build libmpg123
+        run: |
+          ./emlib.sh build libmpg123 || true
+
+      - name: build zlib
+        run: |
+          ./emlib.sh build zlib || true
+
+      - name: build libpng
+        run: |
+          ./emlib.sh build libpng || true
+
+      - name: build harfbuzz
+        run: |
+          ./emlib.sh build harfbuzz || true
+
+      - name: build freetype
+        run: |
+          ./emlib.sh build freetype || true
+
+      - name: build soundtouch
+        run: |
+          ./emlib.sh build soundtouch || true
+
       - name: save files
         uses: actions/upload-artifact@v2
         with:
