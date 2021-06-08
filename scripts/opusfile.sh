@@ -25,7 +25,7 @@ function build() {
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
         cd ${BuildDirName}
-        emconfigure ../configure --prefix=${SysRootDir} --disable-shared --enable-static --disable-examples
+        emconfigure ../configure --prefix=${SysRootDir} --host x86 --disable-shared --enable-static --disable-examples --enable-http=no
     else
         cd ${BuildDirName}
     fi

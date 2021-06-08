@@ -29,7 +29,9 @@ function build() {
             -DCMAKE_PREFIX_PATH="${SysRootDir}" \
             -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
             -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
-            -DCMAKE_C_FLAGS="-Wall -s ALLOW_MEMORY_GROWTH=1" ..
+            -DCMAKE_C_FLAGS="${CFLAGS} -Wall -s ALLOW_MEMORY_GROWTH=1" ..
+
+        sed -ie "s/#define SIZEOF_SIZE_T  7/#define SIZEOF_SIZE_T  8/g" jconfigint.h
     else
         cd ${BuildDirName}
     fi
