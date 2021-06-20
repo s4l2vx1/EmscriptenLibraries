@@ -27,7 +27,6 @@ function build() {
             -DCMAKE_BUILD_TYPE=Release \
             -DFT_WITH_ZLIB=On \
             -DFT_WITH_PNG=On \
-            -DFT_WITH_HARFBUZZ=On \
             -DCMAKE_PREFIX_PATH="${SysRootDir}" \
             -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
             -DCMAKE_INSTALL_PREFIX="${SysRootDir}" ..
