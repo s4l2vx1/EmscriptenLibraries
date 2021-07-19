@@ -26,20 +26,35 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
+function flags() {
+
+    if [ "${EnableShared}" == "1" ]; then
+        CFLAGS+=" -DPNG_IMPEXP='__attribute__((used))'"
+        CXXFLAGS+=" -DPNG_IMPEXP='__attribute__((used))'"
+        AdditionalFlags="${AdditionalFlags} -DPNG_SHARED=ON -DPNG_STATIC=OFF -DPNG_BUILD_ZLIB=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
+    else
+        AdditionalFlags="${AdditionalFlags} -DPNG_SHARED=OFF -DPNG_STATIC=ON -DPNG_BUILD_ZLIB=ON"
+    fi
+
+    AdditionalFlags+=" -DCMAKE_C_FLAGS=\"${CFLAGS}\" -DCMAKE_CXX_FLAGS=\"${CXXFLAGS}\""
+}
+
 function build() {
+    flags
+
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
-        cd ${BuildDirName}
-        
-        emcmake cmake -G"Unix Makefiles" \
+    fi
+
+    cd ${BuildDirName}
+
+    eval "emcmake cmake -G\"Unix Makefiles\" \
             -DCMAKE_BUILD_TYPE=Release \
             -DPNG_SHARED=Off \
-            -DCMAKE_PREFIX_PATH="${SysRootDir}" \
-            -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-            -DCMAKE_INSTALL_PREFIX="${SysRootDir}" ..
-    else
-        cd ${BuildDirName}
-    fi
+            -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
+            -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \
+            -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
+            ${AdditionalFlags} .."
    
     make install -j "${MakeConcurrency}"
 }

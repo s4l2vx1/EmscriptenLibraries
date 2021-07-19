@@ -15,7 +15,10 @@ ModifiedModifiedPackages=()
 SysRootDir=`pwd`
 RepositoryDir="${SysRootDir}/repositories"
 BuildDirName="build_wasm"
+
 MakeConcurrency=$(grep -c ^processor /proc/cpuinfo)
+EnableShared=0
+EnableSIMD=0
 
 function analyse_command_lines() {
   shift 1
@@ -32,6 +35,14 @@ function analyse_command_lines() {
       --build-dir-name)
         BuildDirName="${2}"
         shift 2;;
+      --shared)
+        EnableShared=1
+        export CFLAGS="-s SIDE_MODULE=2"
+        export CXXFLAGS="-s SIDE_MODULE=2"
+        shift 1;;
+      --simd)
+        EnableSIMD=1
+        shift 1;;
       -j)
         MakeConcurrency="${2}"
         shift 2;;

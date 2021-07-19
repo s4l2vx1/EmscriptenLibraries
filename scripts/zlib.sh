@@ -24,19 +24,35 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
+function flags()
+{
+    if [ "${EnableShared}" == "1" ]; then
+        CFLAGS+=" -DZEXPORT='__attribute__((used))'"
+        CXXFLAGS+=" -DZEXPORT='__attribute__((used))'"
+
+        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
+    else
+        AdditionalFlags="-DBUILD_SHARED_LIBS=OFF"
+    fi
+
+    AdditionalFlags+=" -DCMAKE_C_FLAGS=\"${CFLAGS}\" -DCMAKE_CXX_FLAGS=\"${CXXFLAGS}\""
+}
+
 function build() {
+    flags
+
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
-        cd ${BuildDirName}
-
-        emcmake cmake -G"Unix Makefiles" \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_PREFIX_PATH="${SysRootDir}" \
-            -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-            -DCMAKE_INSTALL_PREFIX="${SysRootDir}" ..
-    else
-        cd ${BuildDirName}
     fi
+
+    cd ${BuildDirName}
+
+    eval "emcmake cmake  -G\"Unix Makefiles\" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
+        -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \
+        -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
+        ${AdditionalFlags} .."
     
     make install -j "${MakeConcurrency}"
 }

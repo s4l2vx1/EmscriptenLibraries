@@ -8,8 +8,6 @@ EmscriptenDir="${EMSDK}/upstream/emscripten"
 function init() {
     cd ${RepositoryDir}
 
-    echo "emlib: opencv: TODO: Search EmscriptenDir"
-
     if [ "${EMSDK}" == "" ] && [ ! -e "${EmscriptenDir}" ]; then
         echo "Please specify emscripten install path. (see opencv.sh)"
         exit 1
@@ -26,13 +24,30 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
+function flags() {
+    AdditionalFlags="--build_flags=\"${CFLAGS}\""
+
+    if [ "${EnableSIMD}" == "1" ]; then
+        AdditionalFlags="${AdditionalFlags} --simd"
+    fi
+
+    if [ "${EnableShared}" == "1" ]; then
+        AdditionalFlags="${AdditionalFlags} --cmake_option=\"-DBUILD_SHARED_LIBS=ON\" --cmake_option=\"-DOPENCV_SKIP_GC_SECTIONS=ON\" --cmake_option=\"-DENABLE_PIC=TRUE\""
+    else
+        AdditionalFlags="${AdditionalFlags} --cmake_option=\"-DBUILD_SHARED_LIBS=OFF\""
+    fi
+}
+
 function build() {
-    python3 ./platforms/js/build_js.py ${BuildDirName} \
+    flags
+
+    eval "python3 ./platforms/js/build_js.py ${BuildDirName} \
         --build_wasm \
-        --cmake_option="-DCMAKE_INSTALL_PREFIX=${SysRootDir}" \
-        --cmake_option="-DOPENCV_GENERATE_PKGCONFIG=ON" \
-        --build_flags="-mno-bulk-memory" \
-        --emscripten_dir="${EmscriptenDir}"
+        --cmake_option=\"-DCMAKE_INSTALL_PREFIX=${SysRootDir}\" \
+        --cmake_option=\"-DOPENCV_GENERATE_PKGCONFIG=ON\" \
+        --cmake_option=\"-DCMAKE_SHARED_LIBRARY_SUFFIX=.wasm\" \
+        --emscripten_dir=\"${EmscriptenDir}\" \
+        ${AdditionalFlags}"
         
     cd ${BuildDirName}
     make install
