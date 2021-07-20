@@ -18,6 +18,7 @@ BuildDirName="build_wasm"
 
 MakeConcurrency=$(grep -c ^processor /proc/cpuinfo)
 EnableShared=0
+EnableThreads=0
 EnableSIMD=0
 
 function analyse_command_lines() {
@@ -37,11 +38,27 @@ function analyse_command_lines() {
         shift 2;;
       --shared)
         EnableShared=1
-        export CFLAGS="-s SIDE_MODULE=2"
-        export CXXFLAGS="-s SIDE_MODULE=2"
+
+        CFLAGS+="-s SIDE_MODULE=2 "
+        CXXFLAGS+="-s SIDE_MODULE=2 "
+        LDFLAGS+="-s SIDE_MODULE=2 "
+
         shift 1;;
       --simd)
         EnableSIMD=1
+
+        CFLAGS+="-msimd128 "
+        CXXFLAGS+="-msimd128 "
+        LDFLAGS+="-msimd128 "
+
+        shift 1;;
+      --threads)
+        EnableThreads=1
+
+        CFLAGS+="-pthread "
+        CXXFLAGS+="-pthread "
+        LDFLAGS+="-pthread "
+
         shift 1;;
       -j)
         MakeConcurrency="${2}"

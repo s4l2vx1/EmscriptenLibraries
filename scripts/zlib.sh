@@ -26,16 +26,18 @@ function clean() {
 
 function flags()
 {
-    if [ "${EnableShared}" == "1" ]; then
-        CFLAGS+=" -DZEXPORT='__attribute__((used))'"
-        CXXFLAGS+=" -DZEXPORT='__attribute__((used))'"
+    local AdditionalCFlags=""
 
-        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
+    if [ "${EnableShared}" == "1" ]; then
+        CFLAGS="-DZEXPORT='__attribute__((used))'"
+        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
     else
         AdditionalFlags="-DBUILD_SHARED_LIBS=OFF"
     fi
 
-    AdditionalFlags+=" -DCMAKE_C_FLAGS=\"${CFLAGS}\" -DCMAKE_CXX_FLAGS=\"${CXXFLAGS}\""
+    AdditionalFlags+=" -DCMAKE_C_FLAGS=\"${CFLAGS}\""
+    AdditionalFlags+=" -DCMAKE_CXX_FLAGS=\"${CXXFLAGS} ${AdditionalCFlags}\""
+    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS=\"${LDFLAGS}\""
 }
 
 function build() {

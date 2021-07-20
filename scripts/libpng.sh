@@ -27,16 +27,26 @@ function clean() {
 }
 
 function flags() {
+    local AdditionalCFlags=
 
     if [ "${EnableShared}" == "1" ]; then
-        CFLAGS+=" -DPNG_IMPEXP='__attribute__((used))'"
-        CXXFLAGS+=" -DPNG_IMPEXP='__attribute__((used))'"
-        AdditionalFlags="${AdditionalFlags} -DPNG_SHARED=ON -DPNG_STATIC=OFF -DPNG_BUILD_ZLIB=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
+        AdditionalCFlags="-D\"PNG_IMPEXP=__attribute__((used))\""
+        AdditionalFlags="-DPNG_SHARED=ON -DPNG_STATIC=OFF -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
     else
-        AdditionalFlags="${AdditionalFlags} -DPNG_SHARED=OFF -DPNG_STATIC=ON -DPNG_BUILD_ZLIB=ON"
+        AdditionalFlags="-DPNG_SHARED=OFF -DPNG_STATIC=ON "
     fi
 
-    AdditionalFlags+=" -DCMAKE_C_FLAGS=\"${CFLAGS}\" -DCMAKE_CXX_FLAGS=\"${CXXFLAGS}\""
+    if [ "${EnableSIMD}" == "1" ]; then
+        AdditionalFlags+=" -DPNG_INTEL_SSE=On"
+    else
+        AdditionalFlags+=" -DPNG_INTEL_SSE=Off"
+    fi
+
+    AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
+    # AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS=\"${LDFLAGS}\""
+
+    echo ${AdditionalFlags}
 }
 
 function build() {
@@ -50,7 +60,7 @@ function build() {
 
     eval "emcmake cmake -G\"Unix Makefiles\" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DPNG_SHARED=Off \
+            -DPNG_BUILD_ZLIB=ON \
             -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
             -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \
             -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
