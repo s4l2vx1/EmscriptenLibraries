@@ -18,20 +18,52 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
+function flags()
+{
+    local AdditionalCFlags=""
+    local AdditionalLDFlags=""
+
+    if [ "${EnableShared}" == "1" ]; then
+        AdditionalCFlags+=" -DWEBP_EXTERN=\"extern __attribute__((used))\""
+        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
+    else
+        AdditionalCFlags+=" -DWEBP_EXTERN=\"extern\""
+        AdditionalFlags="-DBUILD_SHARED_LIBS=OFF"
+    fi
+
+    if [ "${EnableSIMD}" == "1" ]; then
+        AdditionalFlags+=" -DWEBP_ENABLE_SIMD=ON"      
+    else
+        AdditionalFlags+=" -DWEBP_ENABLE_SIMD=OFF"
+    fi
+
+    if [ "${EnableThreads}" == "1" ]; then
+        AdditionalFlags+=" -DWEBP_USE_THREAD=ON"      
+    else
+        AdditionalFlags+=" -DWEBP_USE_THREAD=OFF"
+    fi
+
+    AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS}'"
+}
+
 function build() {
+    flags
+
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
         cd ${BuildDirName}
-        
-        emcmake cmake -G"Unix Makefiles" \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_PREFIX_PATH="${SysRootDir}" \
-            -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-            -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
-            -DWEBP_BUILD_WEBP_JS=On ..
-    else
-        cd ${BuildDirName}
     fi
+
+    cd ${BuildDirName}
+
+    eval "emcmake cmake -G\"Unix Makefiles\" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
+            -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \
+            -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
+            ${AdditionalFlags} .."
     
     make install -j "${MakeConcurrency}"
 }

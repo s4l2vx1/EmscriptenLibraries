@@ -9,6 +9,7 @@ function init() {
 
     if [ ! -e "${RepositoryName}" ]; then
         git clone --depth 1 ${RepositoryAddress}
+        sed -ie "s/#else/#elif !defined(DLLEXPORT)/g" ${RepositoryName}/turbojpeg.h  
     fi
 
     cd ${RepositoryName}
@@ -18,23 +19,46 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
+function flags()
+{
+    local AdditionalCFlags="-s ALLOW_MEMORY_GROWTH=1"
+    local AdditionalLDFlags=""
+
+    if [ "${EnableShared}" == "1" ]; then
+        AdditionalCFlags+=" -DDLLEXPORT=\"__attribute__((used))\""
+        AdditionalFlags="-DENABLE_SHARED=1 -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
+    else
+        AdditionalFlags="-DENABLE_SHARED=0"
+    fi
+
+    if [ "${EnableSIMD}" == "1" ]; then
+        AdditionalFlags+=" -DWITH_SIMD=1"      
+    else
+        AdditionalFlags+=" -DWITH_SIMD=0"
+    fi
+
+    AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS} ${AdditionalLDFlags}'"
+}
+
 function build() {
+    flags
+
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
-        cd ${BuildDirName}
-
-        emcmake cmake -G"Unix Makefiles" -DCMAKE_EXECUTABLE_SUFFIX=.html \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DWITH_SIMD=0 -DENABLE_SHARED=0 \
-            -DCMAKE_PREFIX_PATH="${SysRootDir}" \
-            -DCMAKE_FIND_ROOT_PATH="${SysRootDir}" \
-            -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
-            -DCMAKE_C_FLAGS="${CFLAGS} -Wall -s ALLOW_MEMORY_GROWTH=1" ..
-
-        sed -ie "s/#define SIZEOF_SIZE_T  7/#define SIZEOF_SIZE_T  8/g" jconfigint.h
-    else
-        cd ${BuildDirName}
     fi
+
+    cd ${BuildDirName}
+
+    eval "emcmake cmake -G\"Unix Makefiles\" -DCMAKE_EXECUTABLE_SUFFIX=.html \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
+            -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \
+            -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
+            ${AdditionalFlags} .."
+
+    sed -ie "s/#define SIZEOF_SIZE_T  7/#define SIZEOF_SIZE_T  8/g" jconfigint.h
     
     make install -j "${MakeConcurrency}"
 }

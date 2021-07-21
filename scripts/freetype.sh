@@ -20,16 +20,18 @@ function clean() {
 
 function flags()
 {
-    if [ "${EnableShared}" == "1" ]; then
-        CFLAGS+=" -D'FT_EXPORT(x)=__attribute__((used)) x'"
-        CXXFLAGS+=" -D'FT_EXPORT(x)=__attribute__((used)) x'"
+    local AdditionalCFlags=
 
+    if [ "${EnableShared}" == "1" ]; then
+        AdditionalCFlags+=" -D\"FT_EXPORT(x)=__attribute__((used)) x\""
         AdditionalFlags=" -DBUILD_SHARED_LIBS=ON"
     else
         AdditionalFlags=" -DBUILD_SHARED_LIBS=OFF"
     fi
 
-    AdditionalFlags+="-DCMAKE_C_FLAGS=\"${CFLAGS}\" -DCMAKE_CXX_FLAGS=\"${CXXFLAGS}\""
+    AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS}'"
 }
 
 function build() {
