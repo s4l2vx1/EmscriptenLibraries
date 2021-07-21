@@ -33,7 +33,7 @@ function flags() {
         AdditionalCFlags="-D\"PNG_IMPEXP=__attribute__((used))\""
         AdditionalFlags="-DPNG_SHARED=ON -DPNG_STATIC=OFF -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
     else
-        AdditionalFlags="-DPNG_SHARED=OFF -DPNG_STATIC=ON "
+        AdditionalFlags="-DPNG_SHARED=OFF -DPNG_STATIC=ON"
     fi
 
     if [ "${EnableSIMD}" == "1" ]; then
@@ -44,7 +44,7 @@ function flags() {
 
     AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
     AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
-    # AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS=\"${LDFLAGS}\""
+    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS}'"
 
     echo ${AdditionalFlags}
 }
