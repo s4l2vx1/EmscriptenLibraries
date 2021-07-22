@@ -21,14 +21,29 @@ function clean() {
     rm -rf ${BuildDirName}
 }
 
+function flags()
+{
+    AdditionalCFlags="${CFLAGS}"
+    AdditionalLDFlags="${LDFLAGS}"
+
+    if [ "${EnableShared}" == "1" ]; then
+        AdditionalFlags="--enable-shared"
+        AdditionalLDFlags+=" -Wc,-sSIDE_MODULE=1"    
+    else
+        AdditionalFlags="--enable-static"
+    fi
+}
+
 function build() {
+    flags
+
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
-        cd ${BuildDirName}
-        emconfigure ../configure enable_static=yes enable_shared=no --host x86 --prefix=${SysRootDir}
-    else
-        cd ${BuildDirName}
     fi
     
-    make install -j "${MakeConcurrency}"
+    cd ${BuildDirName}
+    
+    CFLAGS="${AdditionalCFlags}" LDFLAGS="${AdditionalLDFlags}" eval "emconfigure ../configure ${AdditionalFlags} --host x86-unknown-linux --prefix=${SysRootDir}"
+    
+    CFLAGS="${AdditionalCFlags}" LDFLAGS="${AdditionalLDFlags}" make install -j "${MakeConcurrency}"
 }

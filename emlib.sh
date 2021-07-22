@@ -21,6 +21,10 @@ EnableShared=0
 EnableThreads=0
 EnableSIMD=0
 
+export CFLAGS=${CFLAGS}
+export CXXFLAGS=${CXXFLAGS}
+export LDFLAGS=${LDFLAGS}
+
 function analyse_command_lines() {
   shift 1
 
