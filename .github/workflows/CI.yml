@@ -10,8 +10,22 @@ jobs:
         config:
           - container: 'emscripten/emsdk:latest'
             artifactName: 'emscripten-latest'
+            buildFlags: ''
+          - container: 'emscripten/emsdk:2.0.22'
+            artifactName: 'emscripten-2.0.22'   
+            buildFlags: ''      
+          - container: 'emscripten/emsdk:2.0.22'
+            artifactName: 'emscripten-2.0.22-shared'   
+            buildFlags: '--shared'
+          - container: 'emscripten/emsdk:2.0.22'
+            artifactName: 'emscripten-2.0.22-simd'   
+            buildFlags: '--simd'
+          - container: 'emscripten/emsdk:2.0.22'
+            artifactName: 'emscripten-2.0.22-simd-threads'   
+            buildFlags: '--simd --threads' 
           - container: 'emscripten/emsdk:2.0.4'
-            artifactName: 'emscripten-2.0.4'         
+            artifactName: 'emscripten-2.0.4'   
+            buildFlags: ''             
     container: 
       image: ${{ matrix.config.container }}
 
@@ -33,71 +47,59 @@ jobs:
 
       - name: build webp
         run: |
-          ./emlib.sh build webp || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} webp || true
 
       - name: build turbojpeg
         run: |
-          ./emlib.sh build turbojpeg || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} turbojpeg || true
 
       - name: build giflib
         run: |
-          ./emlib.sh build giflib || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} giflib || true
 
       - name: build libtiff
         run: |
-          ./emlib.sh build libtiff || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} libtiff || true
 
       - name: build ogg
         run: |
-          ./emlib.sh build ogg || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} ogg || true
 
       - name: build opus
         run: |
-          ./emlib.sh build opus || true
-
-      - name: build flatbuffers
-        run: |
-          ./emlib.sh build flatbuffers || true
-
-      - name: build libopenssl
-        run: |
-          ./emlib.sh build libopenssl || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} opus || true
 
       - name: build opusfile
         run: |
-          ./emlib.sh build opusfile || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} opusfile || true
 
       - name: build opencv
         run: |
-          ./emlib.sh build opencv || true
-
-      - name: build ffmpeg
-        run: |
-          ./emlib.sh build ffmpeg || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} opencv || true
 
       - name: build libmpg123
         run: |
-          ./emlib.sh build libmpg123 || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} libmpg123 || true
 
       - name: build zlib
         run: |
-          ./emlib.sh build zlib || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} zlib || true
 
       - name: build libpng
         run: |
-          ./emlib.sh build libpng || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} libpng || true
 
       - name: build harfbuzz
         run: |
-          ./emlib.sh build harfbuzz || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} harfbuzz || true
 
       - name: build freetype
         run: |
-          ./emlib.sh build freetype || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} freetype || true
 
       - name: build soundtouch
         run: |
-          ./emlib.sh build soundtouch || true
+          ./emlib.sh build ${{ matrix.config.buildFlags }} soundtouch || true
 
       - name: save files
         uses: actions/upload-artifact@v2
