@@ -60,7 +60,6 @@ function build() {
 
     eval "emcmake cmake -G\"Unix Makefiles\" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DPNG_BUILD_ZLIB=ON \
             -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
             -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \
             -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
