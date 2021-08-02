@@ -48,6 +48,12 @@ function analyse_command_lines() {
         LDFLAGS+="-s SIDE_MODULE=2 "
 
         shift 1;;
+      --side-module)
+        CFLAGS+="-s SIDE_MODULE=2 "
+        CXXFLAGS+="-s SIDE_MODULE=2 "
+        LDFLAGS+="-s SIDE_MODULE=2 "
+
+        shift 1;;
       --simd)
         EnableSIMD=1
 
