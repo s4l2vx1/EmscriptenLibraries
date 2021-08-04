@@ -22,13 +22,16 @@ function flags()
 {
     local AdditionalCFlags=""
     local AdditionalLDFlags=""
+    AdditionalFlags="-DWEBP_BUILD_ANIM_UTILS=OFF -DWEBP_BUILD_CWEBP=OFF -DWEBP_BUILD_DWEBP=OFF"
+    AdditionalFlags+=" -DWEBP_BUILD_GIF2WEBP=OFF -DWEBP_BUILD_IMG2WEBP=OFF -DWEBP_BUILD_VWEBP=OFF"
+    AdditionalFlags+=" -DWEBP_BUILD_WEBPINFO=OFF -DWEBP_BUILD_WEBPMUX=OFF -DWEBP_BUILD_EXTRAS=OFF"
 
     if [ "${EnableShared}" == "1" ]; then
         AdditionalCFlags+=" -DWEBP_EXTERN=\"extern __attribute__((used))\""
-        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
+        AdditionalFlags=" -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
     else
         AdditionalCFlags+=" -DWEBP_EXTERN=\"extern\""
-        AdditionalFlags="-DBUILD_SHARED_LIBS=OFF"
+        AdditionalFlags=" -DBUILD_SHARED_LIBS=OFF"
     fi
 
     if [ "${EnableSIMD}" == "1" ]; then

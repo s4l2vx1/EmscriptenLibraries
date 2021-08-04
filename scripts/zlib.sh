@@ -30,9 +30,7 @@ function flags()
 
     if [ "${EnableShared}" == "1" ]; then
         AdditionalCFlags="-DZEXPORT=\"__attribute__((used))\""
-        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
-    else
-        AdditionalFlags="-DBUILD_SHARED_LIBS=OFF"
+        AdditionalFlags="-DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
     fi
 
     AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
@@ -49,7 +47,7 @@ function build() {
 
     cd ${BuildDirName}
 
-    eval "emcmake cmake  -G\"Unix Makefiles\" \
+    eval "emcmake cmake -G\"Unix Makefiles\" \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
         -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \

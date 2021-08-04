@@ -58,7 +58,7 @@ function build() {
             -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
             ${AdditionalFlags} .."
 
-    sed -ie "s/#define SIZEOF_SIZE_T  7/#define SIZEOF_SIZE_T  8/g" jconfigint.h
+    sed -ie "s/#define SIZEOF_SIZE_T  1/#define SIZEOF_SIZE_T  4/g" jconfigint.h
     
     make install -j "${MakeConcurrency}"
 }

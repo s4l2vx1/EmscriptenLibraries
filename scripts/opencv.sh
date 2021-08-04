@@ -25,17 +25,23 @@ function clean() {
 }
 
 function flags() {
-    AdditionalFlags="--build_flags=\"${CFLAGS}\""
+    local AdditionalCFlags=""
+    local AdditionalLDFlags=""
+    AdditionalFlags=""
 
     if [ "${EnableSIMD}" == "1" ]; then
-        AdditionalFlags="${AdditionalFlags} --simd"
+        AdditionalFlags+="--simd"
     fi
 
     if [ "${EnableShared}" == "1" ]; then
-        AdditionalFlags="${AdditionalFlags} --cmake_option=\"-DBUILD_SHARED_LIBS=ON\" --cmake_option=\"-DOPENCV_SKIP_GC_SECTIONS=ON\" --cmake_option=\"-DENABLE_PIC=TRUE\""
+        AdditionalCFlags+="-s SIDE_MODULE=1"
+        AdditionalFlags+=" --cmake_option=\"-DBUILD_SHARED_LIBS=ON\" --cmake_option=\"-DOPENCV_SKIP_GC_SECTIONS=ON\" --cmake_option=\"-DENABLE_PIC=TRUE\""
     else
-        AdditionalFlags="${AdditionalFlags} --cmake_option=\"-DBUILD_SHARED_LIBS=OFF\""
+        AdditionalFlags+=" --cmake_option=\"-DBUILD_SHARED_LIBS=OFF\""
     fi
+
+    AdditionalFlags+=" --build_flags=\"${AdditionalCFlags}\""
+    AdditionalFlags+=" --cmake_option=\"-DCMAKE_SHARED_LINKER_FLAGS='${AdditionalLDFlags}'\""
 }
 
 function build() {
