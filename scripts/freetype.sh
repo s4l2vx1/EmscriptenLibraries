@@ -21,12 +21,13 @@ function clean() {
 function flags()
 {
     local AdditionalCFlags=
+    AdditionalFlags="${MakeFlags}"
 
     if [ "${EnableShared}" == "1" ]; then
         AdditionalCFlags+=" -D\"FT_EXPORT(x)=__attribute__((used)) x\""
-        AdditionalFlags=" -DBUILD_SHARED_LIBS=ON"
+        AdditionalFlags+=" -DBUILD_SHARED_LIBS=ON"
     else
-        AdditionalFlags=" -DBUILD_SHARED_LIBS=OFF"
+        AdditionalFlags+=" -DBUILD_SHARED_LIBS=OFF"
     fi
 
     AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
@@ -47,7 +48,6 @@ function build() {
             -DCMAKE_BUILD_TYPE=Release \
             -DFT_WITH_ZLIB=On \
             -DFT_WITH_PNG=On \
-            -DFT_WITH_HARFBUZZ=Off \
             -DCMAKE_PREFIX_PATH='${SysRootDir}' \
             -DCMAKE_FIND_ROOT_PATH='${SysRootDir}' \
             -DCMAKE_INSTALL_PREFIX='${SysRootDir}' \

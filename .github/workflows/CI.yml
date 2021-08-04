@@ -92,13 +92,17 @@ jobs:
         run: |
           ./emlib.sh build ${{ matrix.config.buildFlags }} libpng || true
 
+      - name: build freetype
+        run: |
+          ./emlib.sh build ${{ matrix.config.buildFlags }} freetype || true
+
       - name: build harfbuzz
         run: |
           ./emlib.sh build ${{ matrix.config.buildFlags }} harfbuzz || true
 
       - name: build freetype
         run: |
-          ./emlib.sh build ${{ matrix.config.buildFlags }} freetype || true
+          ./emlib.sh rebuild ${{ matrix.config.buildFlags }} --flags "-DFT_WITH_HARFBUZZ=On" freetype || true
 
       - name: build soundtouch
         run: |

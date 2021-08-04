@@ -24,6 +24,7 @@ EnableSIMD=0
 export CFLAGS=${CFLAGS}
 export CXXFLAGS=${CXXFLAGS}
 export LDFLAGS=${LDFLAGS}
+export MakeFlags=""
 
 function analyse_command_lines() {
   shift 1
@@ -72,6 +73,9 @@ function analyse_command_lines() {
         shift 1;;
       -j)
         MakeConcurrency="${2}"
+        shift 2;;
+      --flags)
+        MakeFlags+=" ${2}"
         shift 2;;
       *)
         ModifiedPackages+=( "${1}" )
