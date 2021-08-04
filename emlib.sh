@@ -79,7 +79,7 @@ function analyse_command_lines() {
     esac
   done
 
-  export PKG_CONFIG_PATH="${SysRootDir}/lib/pkgconfig"
+  export PKG_CONFIG_PATH="${SysRootDir}/lib/pkgconfig:${SysRootDir}/share/pkgconfig"
   export EM_PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
 }
 
