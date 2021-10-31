@@ -10,7 +10,7 @@ function usage() {
 }
 
 StartDir=`pwd`
-ModifiedModifiedPackages=()
+ModifiedPackages=()
 
 SysRootDir=`pwd`
 RepositoryDir="${SysRootDir}/repositories"
