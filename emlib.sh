@@ -33,7 +33,6 @@ function analyse_command_lines() {
     case "${1}" in
       --sysroot)
         SysRootDir="${2}"
-        RepositoryDir="${SysRootDir}/repositories"
         shift 2;;
       --repository-dir)
         RepositoryDir="${2}"
@@ -46,7 +45,7 @@ function analyse_command_lines() {
 
         CFLAGS+="-s SIDE_MODULE=2 "
         CXXFLAGS+="-s SIDE_MODULE=2 "
-        LDFLAGS+="-s SIDE_MODULE=2 "
+        LDFLAGS+="-s SIDE_MODULE=2 --oformat=wasm "
 
         shift 1;;
       --side-module)
@@ -58,9 +57,9 @@ function analyse_command_lines() {
       --simd)
         EnableSIMD=1
 
-        CFLAGS+="-msimd128 "
-        CXXFLAGS+="-msimd128 "
-        LDFLAGS+="-msimd128 "
+        CFLAGS+="-msimd128 -msse4.2"
+        CXXFLAGS+="-msimd128 -msse4.2"
+        LDFLAGS+="-msimd128 -msse4.2"
 
         shift 1;;
       --threads)
