@@ -44,7 +44,7 @@ function build() {
 
     cd ${BuildDirName}
 
-    eval "emcmake cmake -G\"Unix Makefiles\" \
+    eval "${CMakeCommand} -G\"Unix Makefiles\" \
             -DCMAKE_BUILD_TYPE=Release \
             -DFT_WITH_ZLIB=On \
             -DFT_WITH_PNG=On \

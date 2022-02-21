@@ -29,6 +29,10 @@ function clean() {
 function flags() {
     local AdditionalCFlags=
 
+    if [ -z ${WASI+x} ]; then
+        AdditionalCFlags="-DPNG_NO_SETJMP_SUPPORTED"
+    fi
+
     if [ "${EnableShared}" == "1" ]; then
         AdditionalCFlags="-D\"PNG_IMPEXP=__attribute__((used))\""
         AdditionalFlags="-DPNG_SHARED=ON -DPNG_STATIC=OFF -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""
@@ -58,7 +62,7 @@ function build() {
 
     cd ${BuildDirName}
 
-    eval "emcmake cmake -G\"Unix Makefiles\" \
+    eval "${CMakeCommand} -G\"Unix Makefiles\" \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \
             -DCMAKE_FIND_ROOT_PATH=\"${SysRootDir}\" \

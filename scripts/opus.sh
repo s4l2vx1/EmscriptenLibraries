@@ -53,7 +53,7 @@ function build() {
 
     cd ${BuildDirName}
 
-    eval "emcmake cmake -G\"Unix Makefiles\" \
+    eval "${CMakeCommand} -G\"Unix Makefiles\" \
             -DCMAKE_BUILD_TYPE=Release \
             -DOPUS_INSTALL_PKG_CONFIG_MODULE=On \
             -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \

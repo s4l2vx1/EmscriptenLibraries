@@ -48,7 +48,7 @@ function build() {
 
     cd ${BuildDirName}
 
-    eval "emcmake cmake -G\"Unix Makefiles\" \
+    eval "${CMakeCommand} -G\"Unix Makefiles\" \
             -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=On \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_PREFIX_PATH=\"${SysRootDir}\" \

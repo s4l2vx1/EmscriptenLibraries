@@ -17,9 +17,13 @@ RepositoryDir="${SysRootDir}/repositories"
 BuildDirName="build_wasm"
 
 MakeConcurrency=$(grep -c ^processor /proc/cpuinfo)
+MakeConcurrency=${MakeConcurrency:="1"}
 EnableShared=0
 EnableThreads=0
 EnableSIMD=0
+
+CMakeCommand=${CMakeCommand:="emcmake cmake"}
+MakeCommand=${MakeCommand:="emmake make"}
 
 export CFLAGS=${CFLAGS}
 export CXXFLAGS=${CXXFLAGS}
