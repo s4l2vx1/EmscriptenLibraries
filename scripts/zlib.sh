@@ -4,7 +4,7 @@ RepositoryName="zlib"
 RepositoryAddress="https://zlib.net/"
 RepositoryLicense="zlib License"
 
-RepositoryDownloadAddress="https://zlib.net/zlib-1.2.11.tar.gz"
+RepositoryDownloadAddress="https://zlib.net/zlib-1.2.12.tar.gz"
 
 function init() {
     cd ${RepositoryDir}
