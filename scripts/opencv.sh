@@ -37,6 +37,7 @@ function flags() {
         AdditionalCFlags+="-s SIDE_MODULE=1"
         AdditionalFlags+=" --cmake_option=\"-DBUILD_SHARED_LIBS=ON\" --cmake_option=\"-DOPENCV_SKIP_GC_SECTIONS=ON\" --cmake_option=\"-DENABLE_PIC=TRUE\""
     else
+        AdditionalCFlags+="${CFLAGS}"
         AdditionalFlags+=" --cmake_option=\"-DBUILD_SHARED_LIBS=OFF\""
     fi
 

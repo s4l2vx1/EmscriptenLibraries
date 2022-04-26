@@ -4,5 +4,6 @@
 /bin
 /ssl
 /.vscode
+/wasm32-emscripten*
 
 /repositories
