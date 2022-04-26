@@ -29,7 +29,7 @@ function clean() {
 function flags() {
     local AdditionalCFlags=
 
-    if [ -z ${WASI+x} ]; then
+    if [ ! -z ${WASI+x} ]; then
         AdditionalCFlags="-DPNG_NO_SETJMP_SUPPORTED"
     fi
 

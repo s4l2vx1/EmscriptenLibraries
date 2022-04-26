@@ -21,12 +21,12 @@ function clean() {
 function flags()
 {
     local AdditionalCFlags=""
-    local AdditionalLDFlags=""
+    local AdditionalLDFlags="-s ERROR_ON_UNDEFINED_SYMBOLS=0 -Wl,--allow-undefined"
     AdditionalFlags="-DWEBP_BUILD_ANIM_UTILS=OFF -DWEBP_BUILD_CWEBP=OFF -DWEBP_BUILD_DWEBP=OFF"
     AdditionalFlags+=" -DWEBP_BUILD_GIF2WEBP=OFF -DWEBP_BUILD_IMG2WEBP=OFF -DWEBP_BUILD_VWEBP=OFF"
     AdditionalFlags+=" -DWEBP_BUILD_WEBPINFO=OFF -DWEBP_BUILD_WEBPMUX=OFF -DWEBP_BUILD_EXTRAS=OFF"
 
-    if [ -z ${WASI+x} ]; then
+    if [ ! -z ${WASI+x} ]; then
         AdditionalCFlags="-DPNG_NO_SETJMP_SUPPORTED"
     fi
 
@@ -52,7 +52,8 @@ function flags()
 
     AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
     AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
-    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS}'"
+    AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS} ${AdditionalLDFlags}'"
+    AdditionalFlags+=" -DCMAKE_EXE_LINKER_FLAGS='${LDFLAGS} ${AdditionalLDFlags}'"
 }
 
 function build() {
