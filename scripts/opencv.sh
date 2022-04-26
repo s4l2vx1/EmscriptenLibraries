@@ -51,6 +51,8 @@ function build() {
     eval "python3 ./platforms/js/build_js.py ${BuildDirName} \
         --build_wasm \
         --cmake_option=\"-DCMAKE_INSTALL_PREFIX=${SysRootDir}\" \
+        --cmake_option=\"-DCMAKE_PREFIX_PATH=${SysRootDir}\" \
+        --cmake_option=\"-DCMAKE_FIND_ROOT_PATH=${SysRootDir}\" \
         --cmake_option=\"-DOPENCV_GENERATE_PKGCONFIG=ON\" \
         --cmake_option=\"-DCMAKE_SHARED_LIBRARY_SUFFIX=.wasm\" \
         --emscripten_dir=\"${EmscriptenDir}\" \

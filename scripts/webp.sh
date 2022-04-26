@@ -26,6 +26,10 @@ function flags()
     AdditionalFlags+=" -DWEBP_BUILD_GIF2WEBP=OFF -DWEBP_BUILD_IMG2WEBP=OFF -DWEBP_BUILD_VWEBP=OFF"
     AdditionalFlags+=" -DWEBP_BUILD_WEBPINFO=OFF -DWEBP_BUILD_WEBPMUX=OFF -DWEBP_BUILD_EXTRAS=OFF"
 
+    if [ -z ${WASI+x} ]; then
+        AdditionalCFlags="-DPNG_NO_SETJMP_SUPPORTED"
+    fi
+
     if [ "${EnableShared}" == "1" ]; then
         AdditionalCFlags+=" -DWEBP_EXTERN=\"extern __attribute__((used))\""
         AdditionalFlags=" -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
