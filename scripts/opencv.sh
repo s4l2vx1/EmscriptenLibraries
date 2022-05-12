@@ -41,6 +41,12 @@ function flags() {
         AdditionalFlags+=" --cmake_option=\"-DBUILD_SHARED_LIBS=OFF\""
     fi
 
+    if [ "${EnableThreads}" == "1" ]; then
+        AdditionalFlags+=" --cmake_option=\"-DWITH_PTHREADS_PF=ON\""
+    else
+        AdditionalFlags+=" --cmake_option=\"-DWITH_PTHREADS_PF=OFF\""
+    fi
+    
     AdditionalFlags+=" --build_flags=\"${AdditionalCFlags}\""
     AdditionalFlags+=" --cmake_option=\"-DCMAKE_SHARED_LINKER_FLAGS='${AdditionalLDFlags}'\""
 }

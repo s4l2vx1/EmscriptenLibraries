@@ -21,16 +21,33 @@ function clean() {
 function flags()
 {
     local AdditionalCFlags=""
-    AdditionalCFlags+="-DSDL_USE_LIBDBUS=0"
-    AdditionalCFlags+=" -DSDL_EVENTS_DISABLED=1"
-    AdditionalCFlags+=" -DSDL_VIDEO_DISABLED=1"
-    AdditionalCFlags+=" -DSDL_JOYSTICK_DISABLED=1"
-    AdditionalCFlags+=" -DSDL_HAPTIC_DISABLED=1"
-    AdditionalCFlags+=" -DSDL_SENSOR_DISABLED=1"
+
+    if [ "${EnableSIMD}" == "1" ]; then
+        AdditionalFlags+=" -DSDL_SSE=On"
+        AdditionalFlags+=" -DSDL_SSE2=On"
+        AdditionalFlags+=" -DSDL_SSE3=On"
+        AdditionalFlags+=" -DSDL_SSEMATH=On"
+    fi
 
     AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
     AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
     AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS}'"
+    AdditionalFlags+=" -DSDL_ATOMIC=OFF"
+    AdditionalFlags+=" -DSDL_VIDEO=OFF"
+    AdditionalFlags+=" -DSDL_RENDER=OFF"
+    AdditionalFlags+=" -DSDL_EVENTS=OFF"
+    AdditionalFlags+=" -DSDL_JOYSTICK=OFF"
+    AdditionalFlags+=" -DSDL_HAPTIC=OFF"
+    AdditionalFlags+=" -DSDL_HIDAPI=OFF"
+    AdditionalFlags+=" -DSDL_POWER=OFF"
+    AdditionalFlags+=" -DSDL_THREADS=OFF"
+    AdditionalFlags+=" -DSDL_TIMERS=OFF"
+    AdditionalFlags+=" -DSDL_FILE=OFF"
+    AdditionalFlags+=" -DSDL_LOADSO=OFF"
+    AdditionalFlags+=" -DSDL_FILESYSTEM=OFF"
+    AdditionalFlags+=" -DSDL_SENSOR=OFF"
+    AdditionalFlags+=" -DSDL_LOCALE=OFF"
+    AdditionalFlags+=" -DSDL_MISC=OFF"
 }
 
 function build() {
