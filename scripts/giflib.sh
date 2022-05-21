@@ -28,7 +28,6 @@ function flags()
 
     if [ "${EnableShared}" == "1" ]; then
         AdditionalFlags="--enable-shared"
-        AdditionalLDFlags+=" -Wc,-sSIDE_MODULE=1"    
     else
         AdditionalFlags="--enable-static"
     fi

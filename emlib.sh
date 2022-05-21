@@ -61,9 +61,9 @@ function analyse_command_lines() {
       --simd)
         EnableSIMD=1
 
-        CFLAGS+="-msimd128 -msse4.2"
-        CXXFLAGS+="-msimd128 -msse4.2"
-        LDFLAGS+="-msimd128 -msse4.2"
+        CFLAGS+="-msimd128 -msse4.2 "
+        CXXFLAGS+="-msimd128 -msse4.2 "
+        LDFLAGS+="-msimd128 -msse4.2 "
 
         shift 1;;
       --threads)

@@ -9,6 +9,10 @@ function init() {
 
     if [ ! -e "${RepositoryName}" ]; then
         git clone ${RepositoryAddress} -b VER-2-10-0
+
+        sed -i -e "s@^#define FT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES@// #define FT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES@g" freetype/include/freetype/config/ftoption.h
+        sed -i -e "s@^#define FT_CONFIG_OPTION_MAC_FONTS@// #define FT_CONFIG_OPTION_MAC_FONTS@g" freetype/include/freetype/config/ftoption.h
+        sed -i -e "s@^#define TT_CONFIG_OPTION_POSTSCRIPT_NAMES@// #define TT_CONFIG_OPTION_POSTSCRIPT_NAMES@g" freetype/include/freetype/config/ftoption.h
     fi
 
     cd ${RepositoryName}
