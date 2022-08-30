@@ -39,7 +39,7 @@ function flags()
         AdditionalFlags+=" -DOPUS_DISABLE_INTRINSICS=OFF"
     fi
 
-    AdditionalFlags+=" -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
+    AdditionalFlags+=" -DOPUS_STACK_PROTECTOR=OFF -DCMAKE_C_FLAGS='${CFLAGS} ${AdditionalCFlags}'"
     AdditionalFlags+=" -DCMAKE_CXX_FLAGS='${CXXFLAGS} ${AdditionalCFlags}'"
     AdditionalFlags+=" -DCMAKE_SHARED_LINKER_FLAGS='${LDFLAGS} ${AdditionalLDFlags}'"
 }
