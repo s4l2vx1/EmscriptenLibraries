@@ -8,27 +8,21 @@ jobs:
     strategy:
       matrix:
         config:
-          - container: 'emscripten/emsdk:latest'
-            artifactName: 'emscripten-latest'
-            buildFlags: ''
-          - container: 'emscripten/emsdk:2.0.22'
-            artifactName: 'emscripten-2.0.22'   
+          - container: 'emscripten/emsdk:3.1.61'
+            artifactName: 'emscripten-3.1.61'   
             buildFlags: ''      
-          - container: 'emscripten/emsdk:2.0.22'
-            artifactName: 'emscripten-2.0.22-shared'   
+          - container: 'emscripten/emsdk:3.1.61'
+            artifactName: 'emscripten-3.1.61-shared'   
             buildFlags: '--shared'
-          - container: 'emscripten/emsdk:2.0.22'
-            artifactName: 'emscripten-2.0.22-side-module'   
+          - container: 'emscripten/emsdk:3.1.61'
+            artifactName: 'emscripten-3.1.61-side-module'   
             buildFlags: '--side-module'
-          - container: 'emscripten/emsdk:2.0.22'
-            artifactName: 'emscripten-2.0.22-simd'   
+          - container: 'emscripten/emsdk:3.1.61'
+            artifactName: 'emscripten-3.1.61-simd'   
             buildFlags: '--simd'
-          - container: 'emscripten/emsdk:2.0.22'
-            artifactName: 'emscripten-2.0.22-simd-threads'   
-            buildFlags: '--simd --threads' 
-          - container: 'emscripten/emsdk:2.0.4'
-            artifactName: 'emscripten-2.0.4'   
-            buildFlags: ''             
+          - container: 'emscripten/emsdk:3.1.61'
+            artifactName: 'emscripten-3.1.61-simd-threads'   
+            buildFlags: '--simd --threads'
     container: 
       image: ${{ matrix.config.container }}
 
