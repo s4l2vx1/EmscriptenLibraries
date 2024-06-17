@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RepositoryName="soundtouch"
-RepositoryAddress="https://gitlab.com/soundtouch/soundtouch.git"
+RepositoryAddress="-b 2.1.2 https://codeberg.org/soundtouch/soundtouch.git"
 RepositoryLicense="LGPL v2.1"
 
 function init() {

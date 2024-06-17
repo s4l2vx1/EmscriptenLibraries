@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RepositoryName="SDL"
-RepositoryAddress="https://github.com/libsdl-org/SDL.git"
+RepositoryAddress="-b SDL2 https://github.com/libsdl-org/SDL.git"
 RepositoryLicense="zlib License"
 
 function init() {

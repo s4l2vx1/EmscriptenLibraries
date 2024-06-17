@@ -1,20 +1,14 @@
 #!/bin/bash
 
 RepositoryName="zlib"
-RepositoryAddress="https://zlib.net/"
+RepositoryAddress="-b v1.2.13 https://github.com/madler/zlib"
 RepositoryLicense="zlib License"
-
-RepositoryDownloadAddress="https://zlib.net/zlib-1.2.12.tar.gz"
 
 function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        curl "${RepositoryDownloadAddress}" > zlib.tar.gz
-        gzip -d zlib.tar.gz
-        tar -xf zlib.tar
-        find . -type d -name zlib-* | xargs -I{} mv {} zlib
-        rm zlib.tar
+        git clone --depth 1 ${RepositoryAddress}
     fi
 
     cd ${RepositoryName}
