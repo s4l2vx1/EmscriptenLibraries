@@ -21,7 +21,7 @@ function clean() {
 function flags()
 {
     local AdditionalCFlags=""
-    local AdditionalLDFlags="-s ERROR_ON_UNDEFINED_SYMBOLS=0 -Wl,--allow-undefined"
+    local AdditionalLDFlags="-sERROR_ON_UNDEFINED_SYMBOLS=0 -Wl,--allow-undefined"
     AdditionalFlags="-DWEBP_BUILD_ANIM_UTILS=OFF -DWEBP_BUILD_CWEBP=OFF -DWEBP_BUILD_DWEBP=OFF"
     AdditionalFlags+=" -DWEBP_BUILD_GIF2WEBP=OFF -DWEBP_BUILD_IMG2WEBP=OFF -DWEBP_BUILD_VWEBP=OFF"
     AdditionalFlags+=" -DWEBP_BUILD_WEBPINFO=OFF -DWEBP_BUILD_WEBPMUX=OFF -DWEBP_BUILD_EXTRAS=OFF"

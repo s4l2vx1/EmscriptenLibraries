@@ -20,12 +20,12 @@ function clean() {
 
 function flags()
 {
-    local AdditionalCFlags="-s ALLOW_MEMORY_GROWTH=1"
+    local AdditionalCFlags="-sALLOW_MEMORY_GROWTH=1"
     local AdditionalLDFlags=""
 
     if [ "${EnableShared}" == "1" ]; then
         AdditionalFlags="-DBUILD_SHARED_LIBS=On -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
-        AdditionalLDFlags="-s SIDE_MODULE=1"
+        AdditionalLDFlags="-sSIDE_MODULE=1"
     else
         AdditionalFlags="-DBUILD_SHARED_LIBS=Off"
     fi

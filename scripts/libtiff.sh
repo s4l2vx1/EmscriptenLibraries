@@ -22,12 +22,12 @@ function clean() {
 
 function flags()
 {
-    local AdditionalCFlags="-s ALLOW_MEMORY_GROWTH=1"
+    local AdditionalCFlags="-sALLOW_MEMORY_GROWTH=1"
     local AdditionalLDFlags=""
 
     if [ "${EnableShared}" == "1" ]; then
         AdditionalCFlags+=" -DDLLEXPORT=\"__attribute__((used))\""
-        AdditionalLDFlags+="-s SIDE_MODULE=1 -L${SysRootDir}/lib"
+        AdditionalLDFlags+="-sSIDE_MODULE=1 -L${SysRootDir}/lib"
         AdditionalFlags="-DBUILD_SHARED_LIBS=1 -DCMAKE_SHARED_LIBRARY_SUFFIX=\".wasm\""      
     else
         AdditionalFlags="-DBUILD_SHARED_LIBS=0"

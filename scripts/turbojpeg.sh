@@ -21,7 +21,7 @@ function clean() {
 
 function flags()
 {
-    local AdditionalCFlags="-s ALLOW_MEMORY_GROWTH=1 -DUSE_CLZ_INTRINSIC=1"
+    local AdditionalCFlags="-sALLOW_MEMORY_GROWTH=1 -DUSE_CLZ_INTRINSIC=1"
     local AdditionalLDFlags=""
 
     if [ "${EnableShared}" == "1" ]; then

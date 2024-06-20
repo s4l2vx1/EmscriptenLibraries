@@ -33,7 +33,7 @@ function build() {
             -DCMAKE_INSTALL_PREFIX="${SysRootDir}" \
             -DCMAKE_CXX_FLAGS="${CXXFLAGS} -Wno-narrowing" \
             -DJPP_CODEGEN_LDFLAGS="-lnodefs.js --pre-js ${StartDir}/scripts/jumanpp.codegen.pre.js" \
-            -DJPP_EXECUTABLE_LDFLAGS="-s FILESYSTEM=0 -s MINIFY_HTML=0" \
+            -DJPP_EXECUTABLE_LDFLAGS="-sFILESYSTEM=0 -sMINIFY_HTML=0" \
             ..
     else
         cd ${BuildDirName}

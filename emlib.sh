@@ -50,15 +50,15 @@ function analyse_command_lines() {
       --shared)
         EnableShared=1
 
-        CFLAGS+="-s SIDE_MODULE=2 -fPIC "
-        CXXFLAGS+="-s SIDE_MODULE=2 -fPIC "
-        LDFLAGS+="-s SIDE_MODULE=2 --oformat=wasm "
+        CFLAGS+="-sSIDE_MODULE=2 -fPIC "
+        CXXFLAGS+="-sSIDE_MODULE=2 -fPIC "
+        LDFLAGS+="-sSIDE_MODULE=2 --oformat=wasm "
 
         shift 1;;
       --side-module)
-        CFLAGS+="-s SIDE_MODULE=2 -fPIC "
-        CXXFLAGS+="-s SIDE_MODULE=2 -fPIC "
-        LDFLAGS+="-s SIDE_MODULE=2 "
+        CFLAGS+="-sSIDE_MODULE=2 -fPIC "
+        CXXFLAGS+="-sSIDE_MODULE=2 -fPIC "
+        LDFLAGS+="-sSIDE_MODULE=2 "
 
         shift 1;;
       --simd)
