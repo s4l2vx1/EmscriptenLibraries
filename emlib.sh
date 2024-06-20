@@ -25,6 +25,9 @@ EnableSIMD=0
 CMakeCommand=${CMakeCommand:="emcmake cmake"}
 MakeCommand=${MakeCommand:="emmake make"}
 
+CFLAGS+="-include emscripten/version.h -sUSE_SDL=2"
+CXXFLAGS+="-include emscripten/version.h -sUSE_SDL=2"
+
 export CFLAGS=${CFLAGS}
 export CXXFLAGS=${CXXFLAGS}
 export LDFLAGS=${LDFLAGS}
@@ -47,14 +50,14 @@ function analyse_command_lines() {
       --shared)
         EnableShared=1
 
-        CFLAGS+="-s SIDE_MODULE=2 "
-        CXXFLAGS+="-s SIDE_MODULE=2 "
+        CFLAGS+="-s SIDE_MODULE=2 -fPIC"
+        CXXFLAGS+="-s SIDE_MODULE=2 -fPIC"
         LDFLAGS+="-s SIDE_MODULE=2 --oformat=wasm "
 
         shift 1;;
       --side-module)
-        CFLAGS+="-s SIDE_MODULE=2 "
-        CXXFLAGS+="-s SIDE_MODULE=2 "
+        CFLAGS+="-s SIDE_MODULE=2 -fPIC"
+        CXXFLAGS+="-s SIDE_MODULE=2 -fPIC"
         LDFLAGS+="-s SIDE_MODULE=2 "
 
         shift 1;;

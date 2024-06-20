@@ -33,7 +33,7 @@ function build() {
     if [ ! -e "${BuildDirName}" ]; then
         mkdir ${BuildDirName}
         cd ${BuildDirName}
-        emconfigure ../configure --prefix=${SysRootDir} --with-cpu=generic LDFLAGS='-static' -sUSE_SDL=2
+        emconfigure ../configure --prefix=${SysRootDir} --with-cpu=generic LDFLAGS='-static'
     else
         cd ${BuildDirName}
     fi
