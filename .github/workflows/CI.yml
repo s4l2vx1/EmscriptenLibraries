@@ -9,20 +9,23 @@ jobs:
       matrix:
         config:
           - container: 'emscripten/emsdk:3.1.61'
-            artifactName: 'emscripten-3.1.61'   
+            artifactName: 'emscripten-3.1.61 wasm'   
             buildFlags: ''      
           - container: 'emscripten/emsdk:3.1.61'
-            artifactName: 'emscripten-3.1.61-shared'   
+            artifactName: 'emscripten-3.1.61 wasm-shared'   
             buildFlags: '--shared'
           - container: 'emscripten/emsdk:3.1.61'
-            artifactName: 'emscripten-3.1.61-side-module'   
+            artifactName: 'emscripten-3.1.61 wasm-side-module'   
             buildFlags: '--side-module'
           - container: 'emscripten/emsdk:3.1.61'
-            artifactName: 'emscripten-3.1.61-simd'   
+            artifactName: 'emscripten-3.1.61 wasm-simd'   
             buildFlags: '--simd'
           - container: 'emscripten/emsdk:3.1.61'
-            artifactName: 'emscripten-3.1.61-simd-threads'   
+            artifactName: 'emscripten-3.1.61 wasm-mt-simd'   
             buildFlags: '--simd --threads'
+          - container: 'emscripten/emsdk:3.1.61'
+            artifactName: 'emscripten-3.1.61 wasm-mt'   
+            buildFlags: '--threads'
     container: 
       image: ${{ matrix.config.container }}
 
@@ -101,6 +104,10 @@ jobs:
       - name: build soundtouch
         run: |
           ./emlib.sh build ${{ matrix.config.buildFlags }} soundtouch || true
+
+      - name: build SDL2
+        run: |
+          ./emlib.sh build ${{ matrix.config.buildFlags }} SDL2 || true
 
       - name: save files
         uses: actions/upload-artifact@v2

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 RepositoryName="SDL"
-RepositoryAddress="-b SDL2 https://github.com/libsdl-org/SDL.git"
+RepositoryAddress="https://github.com/libsdl-org/SDL.git"
 RepositoryLicense="zlib License"
 
 function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone ${RepositoryAddress}
+        git clone -b release-2.26.x  ${RepositoryAddress}
     fi
 
     cd ${RepositoryName}
