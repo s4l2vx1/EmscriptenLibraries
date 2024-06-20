@@ -18,6 +18,8 @@ function init() {
     fi
 
     cd ${RepositoryName}
+
+    sed -i 's/--memory-init-file 0//g' ./modules/js/CMakeLists.txt 
 }
 
 function clean() {
