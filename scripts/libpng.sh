@@ -16,7 +16,7 @@ function init() {
         find . -type d -name libpng-* | xargs -I{} mv {} libpng
         rm libpng.tar
 
-        sed -ie "s/if(UNIX AND NOT APPLE AND NOT BEOS AND NOT HAIKU)/if(UNIX AND NOT APPLE AND NOT BEOS AND NOT HAIKU AND NOT EMSCRIPTEN)/g" ${RepositoryName}/CMakeLists.txt
+        sed -i -e "s/if(UNIX AND NOT APPLE AND NOT BEOS AND NOT HAIKU)/if(UNIX AND NOT APPLE AND NOT BEOS AND NOT HAIKU AND NOT EMSCRIPTEN)/g" ${RepositoryName}/CMakeLists.txt
     fi
 
     cd ${RepositoryName}

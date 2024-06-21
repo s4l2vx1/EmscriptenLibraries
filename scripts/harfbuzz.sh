@@ -10,7 +10,7 @@ function init() {
     if [ ! -e "${RepositoryName}" ]; then
         git clone --depth 1 -b 4.3.0 ${RepositoryAddress}
 
-        sed -ie "s/if (UNIX)/if (UNIX AND NOT EMSCRIPTEN)/g" "${RepositoryName}/CMakeLists.txt"
+        sed -i -e "s/if (UNIX)/if (UNIX AND NOT EMSCRIPTEN)/g" "${RepositoryName}/CMakeLists.txt"
     fi
 
     cd ${RepositoryName}

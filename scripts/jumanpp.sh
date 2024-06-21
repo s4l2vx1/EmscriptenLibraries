@@ -10,7 +10,7 @@ function init() {
     if [ ! -e "${RepositoryName}" ]; then
         git clone ${RepositoryAddress}
 
-        sed -ie "s/#if defined(__linux__)/#if defined(__linux__) || defined(EMSCRIPTEN)/g" ${RepositoryName}/libs/pathie-cpp/src/path.cpp
+        sed -i -e "s/#if defined(__linux__)/#if defined(__linux__) || defined(EMSCRIPTEN)/g" ${RepositoryName}/libs/pathie-cpp/src/path.cpp
     fi
 
     cd ${RepositoryName}

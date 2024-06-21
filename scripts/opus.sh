@@ -11,6 +11,9 @@ function init() {
         git clone --depth 1 -b v1.3.1 ${RepositoryAddress}
 
         cd ${RepositoryName}
+
+        sed -i -e "s/set(VERSION \${OPUS_LIBRARY_VERSION})/set(VERSION \${PACKAGE_VERSION})/g" CMakeLists.txt
+        
         ./update_version
     else
         cd ${RepositoryName}

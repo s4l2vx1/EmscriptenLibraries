@@ -9,7 +9,7 @@ function init() {
 
     if [ ! -e "${RepositoryName}" ]; then
         git clone --depth 1 -b 2.1.0 ${RepositoryAddress}
-        sed -ie "s/#else/#elif !defined(DLLEXPORT)/g" ${RepositoryName}/turbojpeg.h  
+        sed -i -e "s/#else/#elif !defined(DLLEXPORT)/g" ${RepositoryName}/turbojpeg.h  
     fi
 
     cd ${RepositoryName}
@@ -58,7 +58,7 @@ function build() {
             -DCMAKE_INSTALL_PREFIX=\"${SysRootDir}\" \
             ${AdditionalFlags} .."
 
-    sed -ie "s/#define SIZEOF_SIZE_T  1/#define SIZEOF_SIZE_T  4/g" jconfigint.h
+    sed -i -e "s/#define SIZEOF_SIZE_T  1/#define SIZEOF_SIZE_T  4/g" jconfigint.h
     
     make install -j "${MakeConcurrency}"
 }

@@ -24,7 +24,7 @@ function build() {
         mkdir ${BuildDirName}
         cd ${BuildDirName}
         emconfigure ../Configure --prefix=${SysRootDir} -static no-asm no-threads no-shared no-pic
-        sed -ie "/CROSS_COMPILE=/c CROSS_COMPILE=" Makefile
+        sed -i -e "/CROSS_COMPILE=/c CROSS_COMPILE=" Makefile
     else
         cd ${BuildDirName}
     fi
