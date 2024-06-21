@@ -84,6 +84,7 @@ jobs:
       - name: build zlib
         run: |
           ./emlib.sh build ${{ matrix.config.buildFlags }} zlib || true
+          ./emlib.sh rebuild ${{ matrix.config.buildFlags }} zlib || true
 
       - name: build libpng
         run: |
