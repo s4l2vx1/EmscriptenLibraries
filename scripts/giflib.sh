@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RepositoryName="giflib"
+RepositoryName="giflib-code"
 RepositoryAddress="https://git.code.sf.net/p/giflib/code giflib-code"
 RepositoryLicense="MIT License"
 

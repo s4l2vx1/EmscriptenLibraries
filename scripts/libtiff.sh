@@ -8,7 +8,7 @@ function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone --depth 1 -b v1.3.4 ${RepositoryAddress}
+        git clone --depth 1 -b v4.3.0 ${RepositoryAddress}
         # FIXME: 
         sed -i -e 's/check_type_size("size_t" SIZEOF_SIZE_T)/set(SIZEOF_SIZE_T 8)/g' "libtiff/cmake/TypeSizeChecks.cmake"
     fi
