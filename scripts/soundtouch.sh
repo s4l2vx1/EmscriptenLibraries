@@ -1,14 +1,14 @@
 #!/bin/bash
 
 RepositoryName="soundtouch"
-RepositoryAddress="-b 2.1.2 https://codeberg.org/soundtouch/soundtouch.git"
+RepositoryAddress="https://codeberg.org/soundtouch/soundtouch.git"
 RepositoryLicense="LGPL v2.1"
 
 function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone --depth 1 ${RepositoryAddress}
+        git clone --depth 1 -b 2.1.2 ${RepositoryAddress}
 
         cd ${RepositoryName}
         autoreconf -ifs

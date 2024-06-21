@@ -1,14 +1,14 @@
 #!/bin/bash
 
 RepositoryName="giflib"
-RepositoryAddress="https://github.com/mirrorer/giflib.git"
+RepositoryAddress="https://git.code.sf.net/p/giflib/code giflib-code"
 RepositoryLicense="MIT License"
 
 function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone --depth 1 ${RepositoryAddress}
+        git clone --depth 1 -b 5.2.1 ${RepositoryAddress}
 
         cd ${RepositoryName}
         autoreconf -ifs

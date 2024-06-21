@@ -8,7 +8,7 @@ function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone --depth 1 ${RepositoryAddress}
+        git clone --depth 1 -b v1.2.0 ${RepositoryAddress}
     fi
 
     cd ${RepositoryName}

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 RepositoryName="zlib"
-RepositoryAddress="-b v1.2.13 https://github.com/madler/zlib"
+RepositoryAddress="https://github.com/madler/zlib"
 RepositoryLicense="zlib License"
 
 function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone --depth 1 ${RepositoryAddress}
+        git clone --depth 1 -b v1.2.13  ${RepositoryAddress}
     fi
 
     cd ${RepositoryName}

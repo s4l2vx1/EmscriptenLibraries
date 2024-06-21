@@ -8,7 +8,7 @@ function init() {
     cd ${RepositoryDir}
 
     if [ ! -e "${RepositoryName}" ]; then
-        git clone ${RepositoryAddress}
+        git clone -b curl-7_77_0 ${RepositoryAddress}
     fi
 
     cd ${RepositoryName}
